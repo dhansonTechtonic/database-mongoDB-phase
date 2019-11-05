@@ -6,28 +6,59 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
 router.use(bodyParser.json())
 
-router.delete('/deleteBy?', function (req, res) {
-});
-
 router.post('/', function (req, res) {
     Database.insertMany(req.body, (err, movie) => {
         if (err) {
-            res.send(err);
+            res.status(500).send(err);
         }else if (movie){
-            res.send(movie);
+            res.status(200).send(movie);
         }
-    });
-});
-
-router.get('/', function (req, res) {
+    })
 });
 
 router.get('/:id', function (req, res) {
+    const id = req.params.id;
+    console.log(id)
+    Database.findById(id, (err, movie) => {
+        if (err) {
+            res.status(500).send(err);
+        }else if (movie){
+            res.status(200).send(movie);
+        }
+    })
+});
 
+router.get('/', function (req, res) {
+    Database.find({}).exec((err, movies) => {
+        if (err) {
+            res.status(500).send(err);
+        } else if (movies) {
+            res.status(200).send(movies);
+        }
+    })
 });
 
 router.put('/:id', function (req, res) {
-
+    const id = req.params.id;
+    Database.findByIdAndUpdate(id, req.body, (err, movie) => {
+        if (err) {
+            res.status(500).send(err);
+        }else if (movie) {
+            res.status(200).send(movie);
+        }
+    })
 });
+
+router.delete('/:id', function (req, res) {
+    const id = req.params.id;
+    Database.findByIdAndDelete(id, (err, movie) => {
+        if (err) {
+            res.status(500).send(err);
+        } else if (movie) {
+            res.status(200).send(movie);
+        }
+    })
+});
+
 
 module.exports = router;

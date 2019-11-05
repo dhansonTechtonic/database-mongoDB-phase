@@ -1,24 +1,37 @@
-//imports express and cors and fs as well as the DatabaseController you will be making
+// server.js
 import express from 'express';
+import db from './db';
 import cors from 'cors';
+
+//The fs module provides an API for interacting with the file system
 import fs from 'fs';
+
 import DatabaseController from './controllers/DatabaseController';
-//makes a new express app and sets the port to 3001
 const app = new express();
-const port = 3001;
-//makes sure the app uses cors
+const port = process.env.PORT || 3001;
+
+//CORS Access lift (we eventually want to add security using JWT and whitelist our platforms IP's)
 app.use(cors());
-//gets requirements pdf
+
+//Routes to PDF of requirements using file system
 app.get('/requirements', (req, res) => {
     var filePath = "/files/requirements.pdf";
+    // docs for __dirname -> https://nodejs.org/docs/latest/api/modules.html#modules_dirname
+    // docs for fs -> https://nodejs.org/docs/latest/api/fs.html
     fs.readFile(__dirname + filePath, function (err, data) {
         res.contentType("application/pdf");
         res.send(data);
     });
 });
-//sets the routes for the express app that are defined in the DatabaseController
+
+//Route for all library API's (pointed to controller)
 app.use('/database', DatabaseController);
-//listens on the port we defined earlier
+
+//Create a server that listens on port 8080 of your computer. (https://www.w3schools.com/nodejs/met_server_listen.asp)
 app.listen(port, () => console.log(`Listening on port ${port}!`));
-//exports the app
+
+//Export Module in Node.js
+//The module.exports or exports is a special object which is included in every JS file in the Node.js application by default.
+//Module is a variable that represents current module and exports is an object that will be exposed as a module.
 module.exports = app;
+
