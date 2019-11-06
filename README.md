@@ -46,3 +46,7 @@
 * [x] connect to your MongoDB database using your connection string which is stored in your ```.env```
 
 * [x] add error handling
+
+#### .env
+
+* [x] save your connection string to ```db_connection_string```

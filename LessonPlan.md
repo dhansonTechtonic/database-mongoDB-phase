@@ -5,11 +5,11 @@
 
 - [ ] **Ask about learners' previous experience/familiarity with the topic at hand**
 
-What do you already know about Express, axios, or postgresql? What do you know about setting up the environment for a full stack application? Have you ever built an application from the ground up?
+What do you already know about mongoose and MongoDB? What do you know about setting up the environment for the backend of an application and connecting to a NoSQL database?
 
 - [ ] **State main goal of covering this topic**
 
-The main goal of covering this topic is to give students practice setting up Express, axios, postgresql, and a full stack application.
+The main goal of covering this topic is to give students practice setting up MongoDB and mongoose.
 
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -22,11 +22,11 @@ No lesson prep materials needed here
 ## Overview
 - [ ] **Provide a general overview of the new topic/concept**
 
-Express is a fast, unopinionated, minimalist web framework for Node.js. postgresql is a cross-platform document-oriented database program. Classified as a NoSQL database program, postgresql uses JSON-like documents with schema. postgresql is developed by postgresql Inc. and licensed under the Server Side Public License (SSPL). Axios is a promise based HTTP client for the browser and Node.js. 
+Mongoose is elegant MongoDB object modeling for Node.js. MongoDB is a general purpose, document-based, distributed database built for modern application developers and for the cloud era. No database is more productive to use. 
 
 - [ ] **Explain what students can expect during this learning session**
 
-Students can expect to be guided through starting to build a full stack application using these technologies and then will be making a movie database on top of this.
+Students can expect to be guided through building a backend using these technologies.
 
 - [ ] **Refer to the resources below to think through your lesson**
 
@@ -44,15 +44,15 @@ Students can expect to be guided through starting to build a full stack applicat
 
 - [ ] **Create and state the content learning objectives using a "Students will be able to... (SWBAT)" statement, Bloom's action verbs, and the forms and functions of language that students will use to display their learning**
 
-Students will be able to know how to build an Express app from the ground up with a postgresql database and using axios to make HTTP requests.
+Students will be able to know how to build an Express app from the ground up with a MongoDB database.
 
 - [ ] **Give context around how mastery of this concept ties into the overarching learning goal from the review section**
 
-Mastery of this concept will give students a deeper understanding of how to build full stack applications.
+Mastery of this concept will give students a deeper understanding of how to build full stack applications and backends in NoSQL databases.
 
 - [ ] **Orient them as to why this learning is important and what it's benefits are for them**
 
-Learning how to build a full stack application is important because this is what the students will be doing as developers and they will be using Express, axios, and postgresql frequently.
+Learning how to build a full stack application is important because this is what the students will be doing as developers and they will be using mongoose and MongoDB frequently.
 
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -73,7 +73,7 @@ No lesson materials yet
 
 - [ ] **Describe the general concept, making links to what students have seen before**
 
-The general concept is setting up the environment for building a full stack application using Express, Node.js, postgresql, and axios.
+The general concept is setting up the environment for building a backend using Express, Node.js, mongoose, and MongoDB.
 
 - [ ] **Discuss steps involved**
 
@@ -94,13 +94,13 @@ Walk through setting up the environment for the database project. More details w
 
 - [ ] **Group discussions - allow students to articulate what they saw you do**
 
-How did I get the connection string from postgresql? Why did I need to npm install all these packages? Which packages did I install? What does babel do in this case? What does nodemon do?
+How did I get the connection string from MongoDB? Why did I need to npm install all these packages? Which packages did I install? What does babel do in this case? What does nodemon do?
 
 ------------------------------------------------------------------------------------------------------------------------------
 
 Your lesson prep materials go here 
 
-[I do](https://docs.google.com/presentation/d/1uwimx8XbFGVoYQ6uQJcsSYgflu5khCLrZMCUSERinuE/edit?usp=sharing)
+[I do](https://docs.google.com/presentation/d/14pDVlCS9cZZM2JfzFXbyXFt9R6hwS6BpaA8ha1GsczM/edit?usp=sharing)
 
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -154,7 +154,7 @@ Your lesson prep materials go here
 ## Summary
 - [ ] **Highlight the key points of the lesson**
 
-What was difficult about building the application? What do you need to set up in order to build your application? How do the different files interact with each other? What is going on in your code?
+What was difficult about building the backend? What do you need to set up in order to build your application? How do the different files interact with each other? What is going on in your code?
 
 - [ ] **Review the learning objectives with the class**
 
