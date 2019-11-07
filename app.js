@@ -1,37 +1,72 @@
-// server.js
+import fs from 'fs';
 import express from 'express';
-import db from './db';
+import Database from './models/Database';
 import cors from 'cors';
 
-//The fs module provides an API for interacting with the file system
-import fs from 'fs';
+import db from './db';
 
 import DatabaseController from './controllers/DatabaseController';
 const app = new express();
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
 const port = process.env.PORT || 3001;
 
-//CORS Access lift (we eventually want to add security using JWT and whitelist our platforms IP's)
 app.use(cors());
 
-//Routes to PDF of requirements using file system
 app.get('/requirements', (req, res) => {
     var filePath = "/files/requirements.pdf";
-    // docs for __dirname -> https://nodejs.org/docs/latest/api/modules.html#modules_dirname
-    // docs for fs -> https://nodejs.org/docs/latest/api/fs.html
     fs.readFile(__dirname + filePath, function (err, data) {
         res.contentType("application/pdf");
         res.send(data);
     });
 });
 
-//Route for all library API's (pointed to controller)
 app.use('/database', DatabaseController);
 
-//Create a server that listens on port 8080 of your computer. (https://www.w3schools.com/nodejs/met_server_listen.asp)
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+db.then(connection => {
+    console.log('Connected to MongoDB');
+    app.listen(port, () => console.log(`Listening on port ${port}!`));
+}).catch(error => {
+    console.log(error.message);
+})
 
-//Export Module in Node.js
-//The module.exports or exports is a special object which is included in every JS file in the Node.js application by default.
-//Module is a variable that represents current module and exports is an object that will be exposed as a module.
+
+io.on('connection', function (socket) {
+    socket.on("initial_movies", () => {
+        console.log('here')
+        Database.find({}).exec().then(docs => {
+            console.log(docs)
+            io.sockets.emit("get_movies", docs);
+        });
+    });
+
+    socket.on("editMovie", (movie, id) => {
+        Database
+            .findByIdAndUpdate(id, movie)
+            .then(updatedDoc => {
+                io.sockets.emit("change_movie");
+            });
+    });
+
+    socket.on("deleteMovie", id => {
+        Database.findByIdAndDelete(id).then(
+            deletedDoc => {
+                io.sockets.emit("change_movie");
+            }
+        )
+    })
+
+    socket.on("addMovie", movie => {
+        Database.insertMany(movie).then(postedDoc => {
+            io.sockets.emit("change_movie");
+        })
+    })
+});
+
+
+http.listen(8000, function () {
+    console.log('listening on *:8000');
+});
+
 module.exports = app;
 

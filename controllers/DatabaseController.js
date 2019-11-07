@@ -18,7 +18,6 @@ router.post('/', function (req, res) {
 
 router.get('/:id', function (req, res) {
     const id = req.params.id;
-    console.log(id)
     Database.findById(id, (err, movie) => {
         if (err) {
             res.status(500).send(err);
@@ -29,13 +28,14 @@ router.get('/:id', function (req, res) {
 });
 
 router.get('/', function (req, res) {
-    Database.find({}).exec((err, movies) => {
-        if (err) {
-            res.status(500).send(err);
-        } else if (movies) {
-            res.status(200).send(movies);
-        }
-    })
+    Database.find({}).exec()
+        .then(docs => {
+            console.log(docs)
+            res.status(200).send(docs)
+        })
+        .catch(err => {
+            res.status(500).send(err)
+        })
 });
 
 router.put('/:id', function (req, res) {
