@@ -43,7 +43,7 @@
 
 * [x] import mongoose
 
-* [x] connect to your MongoDB database using your connection string which is stored in your ```.env```
+* [x] connect to your MongoDB database using your connection string which is stored in your ```.env``` and set useFindAndModify to false
 
 * [x] add error handling
 
